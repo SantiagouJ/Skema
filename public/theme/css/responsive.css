@@ -1,0 +1,709 @@
+:root{
+    --azul:#00347A;
+    --nara:#FC7416;
+	--gris-o: #383838;
+    --gris-c: #D9D9D9;
+    --blanco: #ffffff;
+	--negro: #000000;
+
+	/*
+	 * Primer desplegable bajo cada ítem de la barra: color del enlace por orden (1.º / 2.º / 3.º hijo <li>).
+	 * Profundidades siguientes (.skema-submenu-depth-1+): variables --skema-nav-submenu-depth-*.
+	 */
+	--skema-nav-submenu-primer-hijo: #00347a;
+	--skema-nav-submenu-segundo-hijo: #fc7416;
+	--skema-nav-submenu-tercer-hijo: #a2c3e0;
+	--skema-nav-submenu-primer-hijo-bg-hover: rgba(0, 52, 122, 0.08);
+	--skema-nav-submenu-segundo-hijo-bg-hover: rgba(252, 116, 22, 0.12);
+	--skema-nav-submenu-tercer-hijo-bg-hover: rgba(162, 195, 224, 0.35);
+
+	/* Drawer móvil (fondo azul): texto blanco en todos los niveles del submenú. */
+	--skema-nav-submenu-movil-primer-hijo: var(--blanco);
+	--skema-nav-submenu-movil-segundo-hijo: var(--blanco);
+	--skema-nav-submenu-movil-tercer-hijo: var(--blanco);
+
+	/* Sangría izquierda de cada <ul> anidado para alinear con el texto del ítem padre (.dropdown-item). */
+	--skema-nav-submenu-hijo-lista-inset: 1.5rem;
+
+	--skema-nav-submenu-depth-1-text: var(--skema-nav-submenu-primer-hijo);
+	--skema-nav-submenu-depth-1-text-hover: var(--skema-nav-submenu-primer-hijo);
+	--skema-nav-submenu-depth-1-bg-hover: var(--skema-nav-submenu-primer-hijo-bg-hover);
+
+	--skema-nav-submenu-depth-2-text: var(--skema-nav-submenu-primer-hijo);
+	--skema-nav-submenu-depth-2-text-hover: var(--skema-nav-submenu-primer-hijo);
+	--skema-nav-submenu-depth-2-bg-hover: var(--skema-nav-submenu-primer-hijo-bg-hover);
+
+	/* Drawer móvil: 4.º+ hijo y submenús anidados (depth-1 / depth-2). */
+	--skema-nav-submenu-movil-primer-panel-resto: var(--blanco);
+	--skema-nav-submenu-movil-depth-1-text: var(--blanco);
+	--skema-nav-submenu-movil-depth-2-text: var(--blanco);
+
+	/* Ítem activo en el menú drawer (< 720px). */
+	--skema-nav-movil-item-activo: var(--skema-nav-submenu-tercer-hijo);
+}
+
+@layer skema-theme-base, skema-theme-landings;
+
+@media (min-width: 720px){
+    .btn_wa {
+        border-radius: 15px 0px 0px 15px;
+    }
+    /* Barra horizontal: que los submenús no queden recortados por el contenedor del collapse. */
+    #menuPrincipal.navbar-collapse {
+        overflow: visible !important;
+    }
+    nav#principal-menu .navbar-nav > .nav-item.dropdown {
+        position: relative;
+    }
+    /* Submenús anidados: siempre debajo del ítem padre (misma columna que en móvil). */
+    #menuPrincipal .navbar-nav .dropdown-menu li.dropdown {
+        position: relative;
+    }
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        width: 100%;
+        min-width: 0;
+        margin-top: 0.25rem;
+        margin-bottom: 0.35rem;
+        margin-left: 0;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+        padding-right: 0;
+        padding-left: var(--skema-nav-submenu-hijo-lista-inset);
+        border: 0;
+        box-shadow: none;
+        box-sizing: border-box;
+    }
+    #menuPrincipal .navbar-nav .dropdown-item.dropdown-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    /* Submenú desktop: un solo color en categorías y subcategorías. */
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li > a.dropdown-item span {
+        color: var(--skema-nav-submenu-primer-hijo);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-primer-hijo);
+        background-color: var(--skema-nav-submenu-primer-hijo-bg-hover);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item {
+        padding-left: 1rem;
+    }
+}
+@media (max-width: 719px){
+    .btn-abrir {
+        padding: 0;
+        border: none;
+        width: 0%;
+        z-index: 999;
+        background-color: transparent;
+    }
+    .logo-skema.position-absolute {
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 2rem;
+        position: absolute !important;
+    }
+    .logo-skema.position-absolute img, .logo-skema.w-100 img  {
+        filter: brightness(0) invert(1);
+        width: 140px;
+        height: auto;
+        transition: all 0.5s ease;
+    }  
+    
+    .menu-scrolled .logo-skema.position-absolute img{
+        filter: brightness(0) invert(1);
+    }
+    .menu-scrolled .logo-skema.w-100 img{
+        filter: none;
+    }
+    .menu-scrolled #menu-menupricipal .nav-link {
+        color: var(--blanco);
+    }
+    .menu-scrolled .redes i {
+        color: white;
+    }
+    .menu-scrolled .ico-menu{
+        fill: var(--azul);
+    }
+  
+
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        /* left: 0; */
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        bottom: 0;
+        background-color: var(--azul); /* Ajusta el color de fondo según tu diseño */
+        z-index: 9999;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-transition: .2s;
+	    -o-transition: .2s;
+	    transition: .2s;
+        padding: 1rem;
+    }
+    /* Bootstrap 4: submenús en flujo dentro del drawer (evita recortes y posición rara con ul transformado). */
+    #menuPrincipal .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        margin-top: 0.35rem;
+        margin-bottom: 0.5rem;
+        border: 0;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    /* Listas anidadas: mismo criterio de alineación que en desktop (variable). */
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-menu {
+        margin-left: 0;
+        margin-top: 0.25rem;
+        margin-bottom: 0.35rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+        padding-right: 0;
+        padding-left: var(--skema-nav-submenu-hijo-lista-inset);
+        width: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+    /* Drawer: tipografía base; texto blanco (fondo azul del collapse). */
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-item,
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-item span {
+        font-size: 1.15rem;
+        background-color: transparent;
+        color: var(--blanco);
+    }
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-item:hover,
+    #menuPrincipal .navbar-nav .dropdown-menu .dropdown-item:focus {
+        color: var(--blanco);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(1) > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(1) > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-primer-hijo);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(1) > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(1) > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-primer-hijo);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(2) > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(2) > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-segundo-hijo);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(2) > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(2) > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-segundo-hijo);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(3) > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(3) > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-tercer-hijo);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(3) > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(3) > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-tercer-hijo);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(n+4) > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(n+4) > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-primer-panel-resto);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(n+4) > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-0 > li:nth-child(n+4) > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-primer-panel-resto);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-depth-1-text);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item {
+        padding-left: 1rem;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-1 > li > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-depth-1-text);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item span {
+        color: var(--skema-nav-submenu-movil-depth-2-text);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item {
+        padding-left: 1rem;
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu.skema-submenu-depth-2 > li > a.dropdown-item:focus {
+        color: var(--skema-nav-submenu-movil-depth-2-text);
+        background-color: transparent;
+    }
+    /* Ítem activo en submenús: prioridad sobre colores por posición (nth-child). */
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.current-menu-item > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.current-menu-item > a.dropdown-item span,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.active > a.dropdown-item,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.active > a.dropdown-item span {
+        color: var(--skema-nav-movil-item-activo);
+    }
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.current-menu-item > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.current-menu-item > a.dropdown-item:focus,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.active > a.dropdown-item:hover,
+    #menuPrincipal .navbar-nav ul.dropdown-menu[class*="skema-submenu-depth"] > li.active > a.dropdown-item:focus {
+        color: var(--skema-nav-movil-item-activo);
+        background-color: transparent;
+    }
+    .redes {
+        display: flex;
+        gap: 2rem;
+        justify-content: flex-start;
+        position: absolute;
+        left: 2.3rem;
+        bottom: 20%;
+    }
+    .redes i {
+        font-size: 2.1rem;
+    }
+    section#que-es-skema {
+        background-position-x: center;
+        background-size: cover;
+    }
+    #video-banner-movil {
+        width: 100%;
+    height: auto;
+    object-fit: cover;
+        border-radius: 0px 0px 30px 30px;
+    }
+    .item p {
+        font-size: 0.9rem;
+        letter-spacing: 4px;
+        font-weight: 400;
+        padding: 0;
+        text-align: center;
+    }
+    .somos-lideres h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .somos-lideres p {
+        padding: 0;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .item-team img {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+    a.btn-nosotros {
+        display: table;
+        margin: auto;
+        padding: 0.6rem 3rem;
+    }
+    #video-home {
+        height: 255px;
+    }
+    ul#menu-menupricipal {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 60%;
+        top: 40%;
+        width: 100%;
+    }
+    ul#menu-menupricipal .nav-link {
+        font-size: 1.15rem;
+        padding: 13px 0px;
+        color: var(--blanco);
+    }
+    ul#menu-menupricipal .nav-link:hover,
+    ul#menu-menupricipal .nav-link:focus {
+        color: var(--blanco);
+        background-color: transparent;
+    }
+    #menuPrincipal .navbar-nav > .current-menu-item > .nav-link,
+    #menuPrincipal .navbar-nav > .nav-item.active > .nav-link,
+    ul#menu-menupricipal > .current-menu-item > .nav-link {
+        color: var(--skema-nav-movil-item-activo);
+    }
+    
+    button.btn-cerrar {
+        border: none;
+        background-color: transparent;
+        padding: 5px;
+        font-size: 3rem;
+        color: white;
+        position: absolute;
+        top: 0;
+        line-height: 0;
+        left: 0;
+    }
+    nav#principal-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1030;
+        padding: 1rem;
+    }
+    nav#principal-menu.menu-scrolled {
+        background-color: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    ul#menu-menupricipal > *:not(:first-child) {
+        border: none !important;
+    }
+    .txt-oportu p {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    .txt-oportu h3 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    .proyectos h3, .clientes h3, .contacto h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    a.btn-catego {
+        font-size: 1.2rem;
+    }
+    .cont-pro-1, .cont-pro-1 img {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .cont-pro-1, .cont-pro-3, .cont-pro-5, .cont-pro-7, .cont-pro-9, .cont-pro-11, .cont-pro-13, .cont-pro-15, .cont-pro-17, .cont-pro-19, .cont-pro-21, .cont-pro-23,
+    .cont-pro-2, .cont-pro-4, .cont-pro-6, .cont-pro-8, .cont-pro-10, .cont-pro-12, .cont-pro-14, .cont-pro-16, .cont-pro-18, .cont-pro-20, .cont-pro-22, .cont-pro-24 {
+        padding-right: 0rem !important;
+        padding-left: 0px !important;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .cont-pro-1 .hover-infoproyecto, .cont-pro-3 .hover-infoproyecto, .cont-pro-5 .hover-infoproyecto, .cont-pro-7 .hover-infoproyecto, .cont-pro-9 .hover-infoproyecto, .cont-pro-11 .hover-infoproyecto, .cont-pro-13 .hover-infoproyecto, .cont-pro-15 .hover-infoproyecto, .cont-pro-17 .hover-infoproyecto, .cont-pro-19 .hover-infoproyect, .cont-pro-21 .hover-infoproyecto, .cont-pro-23 .hover-infoproyect {
+        border-bottom-left-radius: 0;
+        margin-right: 0;
+    }
+    .cont-pro-2 .hover-infoproyecto, .cont-pro-4 .hover-infoproyecto, .cont-pro-6 .hover-infoproyecto, .cont-pro-8 .hover-infoproyecto, .cont-pro-10 .hover-infoproyecto, .cont-pro-12 .hover-infoproyecto, .cont-pro-14 .hover-infoproyecto, .cont-pro-16 .hover-infoproyecto, .cont-pro-18 .hover-infoproyecto, .cont-pro-20 .hover-infoproyecto, .cont-pro-22 .hover-infoproyecto, .cont-pro-24 .hover-infoproyecto {
+        border-bottom-right-radius: 0;
+        margin-left: 0;
+    }
+    .cont-pro-2 img, .cont-pro-4 img, .cont-pro-6 img, .cont-pro-8 img, .cont-pro-10 img, .cont-pro-12 img, .cont-pro-14 img, .cont-pro-16 img, .cont-pro-18 img, .cont-pro-20 img, .cont-pro-22 img, .cont-pro-24 img {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .cont-pro-1 img, .cont-pro-3 img, .cont-pro-5 img, .cont-pro-7 img, .cont-pro-9 img, .cont-pro-11 img, .cont-pro-13 img, .cont-pro-15 img, .cont-pro-17 img .cont-pro-19 img, .cont-pro-21 img, .cont-pro-23 img {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .solo-uno {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        padding-right: 0rem !important;
+        padding-left: 0px !important;
+    }
+    span.icono-mas {
+        display: none;
+    }
+    .div-cont-pro .img-desc-proyecto,.div-cont-pro:hover .img-desc-proyecto {
+        transform: translateY(-100px);
+    }
+    .div-cont-pro .hover-infoproyecto {
+        opacity: 1;
+    }
+    span.txt-estado {
+        top: 1.3rem;
+        left: 0;
+        font-size: 0.8rem;
+        font-weight: 300;
+        padding: 0.4rem 1rem;
+    }
+    .cont-pro-1 .hover-infoproyecto {
+        margin-right: 0;
+    }
+    .hover-infoproyecto h2 {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .hover-infoproyecto h4 {
+        font-size: 1rem;
+        text-align: center;
+    }
+    .hover-infoproyecto p {
+        padding: 0 2rem;
+        text-align: center;
+    }
+    .cont-pro-1 .hover-infoproyecto {
+        border-bottom-left-radius: 0;
+    }
+    .hover-infoproyecto {
+        transform: translateY(-140px);
+        position: relative;
+        margin-bottom: -8rem;
+    }
+    a.btn-verproyecto {
+        padding: 10px 30px;
+    }
+    .cont-pro-2 .hover-infoproyecto {
+        margin-left: 0;
+        width: 100%;
+    }
+    .cont-pro-2 .hover-infoproyecto {
+        border-bottom-right-radius: 0;
+    }
+    .cont-pro-2, .cont-pro-2 img {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .row-select, .div-pmapas {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .proyect-next, .proyect-prev {
+        top: 30%;
+    }
+    .proyect-prev svg, .proyect-next svg{
+        width: 35px;
+        height: 35px;
+    }
+    select#selectMapas {
+        text-align: center;
+    }
+    
+    .div-pmapas p {
+        text-align: center;
+        font-size: 0.88rem;
+    }
+    .divMapa hr {
+        display: none;
+    }
+    .skema-mapa-stat:not(:last-child) {
+        border-right: none;
+    }
+    .skema-mapa-stat__icon {
+        min-height: 50px;
+    }
+    .skema-mapa-stat__content p {
+        font-size: 1rem;
+    }
+    .divMapa h5 {
+        font-size: 0.8em;
+    }
+    .divMapa p {
+        font-size: 1.35rem;
+    }
+    .div-border img.ico-proye {
+        width: 100%;
+    }
+    .div-border {
+        border-right: none;
+    }
+    .item-nece p {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+    .item-nece p span {
+        display: inline-block;
+        margin: 15px 0px;
+        padding: 5px;
+    }
+    .nec-prev svg, .nec-next svg{
+        width: 20px;
+    }
+    @layer skema-theme-base {
+    .contacto span.wpcf7-list-item {
+        margin: 0% 0% 0% 10%;
+    }
+    input.form-control, select.form-control, textarea.form-control{
+        font-size: 0.85rem !important;
+    }
+    }
+    .logo-footer img.custom-logo {
+        width: 45%;
+    }
+    .site-footer h6 {
+        font-size: 1rem;
+    }
+    .banner-nosotros img, .banner-proyectos img {
+        border-radius: 0px;
+    }
+    .banner-nosotros h1, .banner-proyectos h1 {
+        font-size: 25px;
+        text-align: center;
+    }
+    .banner-nosotros p {
+        font-size: 20px;
+        text-align: center;
+        padding: 0px 20px;
+    }
+    .banner-nosotros p br{
+        display: none;
+    }
+    .valores h2, .trayecto h2, .ofrecemos h2, .descubre h2, .contenido_proy h2, .similares h2, .avance h2 {
+        font-size: 30px;
+    }
+    .valores h3 {
+        font-size: 13px;
+        text-align: center;
+    }
+    .valores p {
+        font-size: 11px;
+        text-align: center;
+    }
+    .trayecto .div_imgs{
+        width: 100%; 
+        padding: 3px;
+    }
+    .ofrecemos h3 {
+        font-size: 28px;
+        line-height: normal;
+    }
+    .ofrecemos p{
+        font-size: 18px;
+    }
+    .sainc h3 {
+        font-size: 20px;
+        text-align: center;
+    }
+    .sainc p {
+        font-size: 17px;
+        text-align: center;
+    }
+    .div_info_anos h4 {
+       font-size: 15px;
+    }
+    .div_info_anos p, .div_info_anos span{
+            font-size: 13px;
+            line-height: normal;
+    }
+    .timeline-line {
+        left: 20px;
+    }
+    .timeline-dot.small{
+            right: 5px;
+            top: 6px;
+    }
+    a.btn-intere{
+        font-size: 20px;
+    }
+    .contenido_proy img {
+        border-radius: 10px;
+    }
+    .contenido_proy p{
+        font-size: 15px;
+    }
+    .ubica_video h2 {
+        font-size: 16px;
+        padding: 15px;
+        gap: 6px;
+        border-radius: 20px;
+    }
+    .ubica_video h2 i.bi.bi-geo-alt-fill {
+        font-size: 30px;
+    }
+    .ubica_video button {
+        width: 130px;
+        font-size: 13px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .ubica_video p {
+        font-size: 15px;
+    }
+    .single-proyectos a.btn-catego {
+        font-size: 15px;
+    }
+    .carac_zonas svg {
+        width: 70px;
+        height: auto;
+    }
+    .carac_zonas p, .carac_zonas span {
+        font-size: 17px;
+    }
+    .avance p {
+        font-size: 18px;
+        text-align: center;
+    }
+    .hover-infoproyecto h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    #ubica iframe {
+        width: 100%;
+        height: 300px;
+    }
+    .page-template-theme_contacto-php .banner-nosotros .card-img-overlay {
+        position: relative;
+    }
+    .page-template-theme_contacto-php .banner-nosotros h1 {
+        font-size: 40px;
+    }
+    .page-template-theme_contacto-php .banner-nosotros p {
+        font-size: 20px;
+    }
+    .info p {
+        font-size: 18px;
+    }
+    .ico-cons{
+    	width: 50px;
+    }
+    .ico-proye{
+    	width: 70px;
+    }
+    .ico-merc{
+    	width: 63px;
+    }
+    #menuPrincipal .navbar-nav .current-menu-item > .nav-link,
+    #menuPrincipal .navbar-nav .nav-item.active > .nav-link {
+        color: var(--skema-nav-movil-item-activo);
+        font-weight: bold !important;
+        font-size: 22px !important;
+    }
+}
+@media only screen and (max-width: 500px) and (min-width: 426px) {
+    .div-selectContact:after {
+        right: 14rem;
+    }
+    .div-select:after {
+        right: 10%;
+    }
+}
+@media only screen and (max-width: 425px) and (min-width: 409px) {
+    .div-selectContact:after {
+        right: 13.5rem;
+    }
+    .div-select:after {
+        right: 4rem;
+    }
+}
+@media only screen and (max-width: 408px) and (min-width: 390px) {
+    .div-selectContact:after {
+        right: 12.5rem;
+    }
+    .div-select:after {
+        right: 3rem;
+    }
+}
+@media only screen and (max-width: 389px) and (min-width: 375px) {
+    .div-selectContact:after {
+        right: 11.5rem;
+    }
+    .div-select:after {
+        right: 3rem;
+    }
+}
+@media only screen and (max-width: 1700px) and (min-width: 1660px) {
+     .div-selectContact:after {
+        right: 23%;
+    }
+}
