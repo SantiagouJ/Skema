@@ -20,17 +20,21 @@ function startSkemaHome() {
 
   var $yt = $(".slick-slider-banner--youtube");
   if ($yt.length && $.fn.slick) {
+    var heroCount = $yt.children(".hero-yt-slide").length;
     $yt.slick({
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: true,
+      autoplay: heroCount > 1,
       autoplaySpeed: 5000,
-      infinite: true,
+      infinite: heroCount > 1,
       arrows: false,
       adaptiveHeight: false,
-      dots: true,
+      dots: heroCount > 1,
       appendDots: $yt.closest(".slider-banner").find(".home-hero-dots"),
     });
+    if (heroCount < 2) {
+      $yt.closest(".slider-banner").find(".home-hero-dots").hide();
+    }
   }
 
   var $projects = $(".skema-proyectos__slider");
@@ -85,6 +89,10 @@ function startSkemaHome() {
   $(".btn-cerrar").on("click", function () {
     $(".navbar-collapse").css({ right: "-100%" });
     $(".btn-abrir").attr("aria-expanded", "false");
+  });
+
+  $(document).on("click", ".is-inactive > a", function (event) {
+    event.preventDefault();
   });
 
   $(document).on("click", "#menuPrincipal a.dropdown-toggle", function (event) {

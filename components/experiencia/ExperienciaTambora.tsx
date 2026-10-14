@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import {
   espacios,
-  estiloDe,
   opcionDe,
   portada,
   proyecto,
@@ -14,7 +13,7 @@ import {
 } from "@/data/tambora";
 import { ApartmentViewer } from "./ApartmentViewer";
 import { FichaProyecto } from "./FichaProyecto";
-import { HotspotsConjunto, ListaConjunto } from "./HotspotsConjunto";
+import { CarruselConjunto, ListaConjunto } from "./HotspotsConjunto";
 import { LeadSheet } from "./LeadSheet";
 import { PanelAcabados } from "./PanelAcabados";
 import styles from "./experiencia.module.css";
@@ -32,7 +31,6 @@ export function ExperienciaTambora() {
   const [leadAbierta, setLeadAbierta] = useState(false);
 
   const espacio = espacios.find((item) => item.id === espacioId) ?? espacios[0];
-  const estilo = estiloDe(seleccion.estilo);
   const muestras = useMemo(
     () => [
       { grupo: "Pintura", ...opcionDe("pintura", seleccion.pintura) },
@@ -41,8 +39,6 @@ export function ExperienciaTambora() {
     ],
     [seleccion],
   );
-
-  const etiqueta = `${estilo.nombre}: ${estilo.uso}`;
 
   return (
     <div className={styles.shell}>
@@ -99,9 +95,7 @@ export function ExperienciaTambora() {
               Ver el apartamento
             </button>
           </aside>
-          <div className={styles.conjuntoFondo} style={{ backgroundImage: `url(${portada.foto})` }}>
-            <HotspotsConjunto activaId={zonaId} onSelect={setZonaId} />
-          </div>
+          <CarruselConjunto />
         </section>
       ) : null}
 
@@ -134,11 +128,10 @@ export function ExperienciaTambora() {
               >
                 Recorrido
               </button>
-              <button type="button" className={styles.vr} disabled>
-                Recorrer con gafas
-                <span>Próximamente</span>
-              </button>
             </div>
+            <p className={styles.vr}>
+              Para vivir la experiencia completa usa gafas VR o ven a la sala de ventas
+            </p>
             {modo === "espacios" ? (
               <div className={styles.espacios}>
                 {espacios.map((item) => (
@@ -191,7 +184,6 @@ export function ExperienciaTambora() {
                   </span>
                 ))}
               </div>
-              <p className={styles.etiqueta}>{etiqueta}</p>
             </div>
           </div>
         </section>

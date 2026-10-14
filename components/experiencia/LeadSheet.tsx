@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState, type FormEvent } from "react";
-import { WHATSAPP, estiloDe, opcionDe, proyecto, type Seleccion } from "@/data/tambora";
+import { WHATSAPP, opcionDe, proyecto, type Seleccion } from "@/data/tambora";
 import styles from "./experiencia.module.css";
 
 type LeadProps = {
@@ -30,7 +30,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
   const pintura = opcionDe("pintura", seleccion.pintura);
   const piso = opcionDe("piso", seleccion.piso);
   const cocina = opcionDe("cocina", seleccion.cocina);
-  const estilo = estiloDe(seleccion.estilo);
 
   function enviar(event: FormEvent) {
     event.preventDefault();
@@ -46,7 +45,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
       `Pintura: ${pintura.nombre}`,
       `Piso: ${piso.nombre}`,
       `Cocina: ${cocina.nombre}`,
-      `Estilo de vida: ${estilo.nombre} (espacio inteligente: ${estilo.uso})`,
     ].join("\n");
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank", "noopener,noreferrer");
     onCerrar();
@@ -84,9 +82,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
           <li>Pintura: {pintura.nombre}</li>
           <li>Piso: {piso.nombre}</li>
           <li>Cocina: {cocina.nombre}</li>
-          <li>
-            Estilo: {estilo.nombre} · {estilo.uso}
-          </li>
         </ul>
         {error ? <p className={styles.error}>{error}</p> : null}
         <button type="submit" className={`${styles.boton} ${styles.botonBloque}`}>

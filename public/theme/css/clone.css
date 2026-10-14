@@ -19,6 +19,27 @@
   position: relative;
 }
 
+.service-ficha.is-inactive {
+  filter: grayscale(1);
+  opacity: 0.62;
+}
+
+.service-ficha.is-inactive .read-more,
+.menu-item.is-inactive > a {
+  pointer-events: none;
+  cursor: default;
+}
+
+.service-ficha.is-inactive .read-more {
+  color: #8a8a8a;
+}
+
+.menu-item.is-inactive > a,
+.menu-item.is-inactive > a span {
+  color: #9a9a9a !important;
+  text-decoration: line-through;
+}
+
 @media (min-width: 720px) {
   #menuPrincipal .navbar-nav > .dropdown:hover > .dropdown-menu,
   #menuPrincipal .dropdown-menu > .dropdown:hover > .dropdown-menu {

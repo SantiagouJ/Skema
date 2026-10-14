@@ -103,6 +103,17 @@ export const portada = {
 
 export type Foto = { src: string; alt: string };
 
+export const fotosConjunto: Foto[] = [
+  { src: "/media/hero-4.jpg", alt: "Tamborá Apartamentos" },
+  { src: "/media/conjunto/piscina.jpg", alt: "Zona de piscina" },
+  { src: "/media/conjunto/acceso.jpg", alt: "Llegada al conjunto" },
+  { src: "/media/V-362-APTO_4-1024x614.jpg", alt: "Apartamento modelo" },
+  ...[4, 5, 14, 2, 16, 7, 12, 6, 11, 8, 22, 3, 15, 13].map((n, i) => ({
+    src: `/media/conjunto/foto-${n}.png`,
+    alt: `Vista del conjunto ${i + 1}`,
+  })),
+];
+
 const modelo = [4, 5, 14, 2, 16, 7, 12, 6, 11, 8, 22, 3, 15, 13];
 
 export const recorrido: Foto[] = [

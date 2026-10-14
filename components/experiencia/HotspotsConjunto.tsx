@@ -1,54 +1,57 @@
-import { zonas } from "@/data/tambora";
+"use client";
+
+import { useState } from "react";
+import { fotosConjunto, zonas } from "@/data/tambora";
 import styles from "./experiencia.module.css";
 
-type HotspotsProps = {
+type ListaProps = {
   activaId: string;
   onSelect: (id: string) => void;
 };
 
-export function HotspotsConjunto({ activaId, onSelect }: HotspotsProps) {
+export function CarruselConjunto() {
+  const [indice, setIndice] = useState(0);
+  const foto = fotosConjunto[indice] ?? fotosConjunto[0];
+
+  function mover(delta: number) {
+    setIndice((actual) => (actual + delta + fotosConjunto.length) % fotosConjunto.length);
+  }
+
   return (
-    <>
-      {zonas.map((zona) => (
-        <button
-          key={zona.id}
-          type="button"
-          className={`${styles.punto} ${zona.id === activaId ? styles.puntoActivo : ""}`}
-          style={{ left: `${zona.x}%`, top: `${zona.y}%` }}
-          aria-label={zona.nombre}
-          aria-pressed={zona.id === activaId}
-          onClick={() => onSelect(zona.id)}
-        />
-      ))}
-    </>
+    <div className={styles.carrusel}>
+      <img src={foto.src} alt={foto.alt} />
+      <p className={styles.contadorCarrusel}>
+        {indice + 1} / {fotosConjunto.length}
+      </p>
+      <div className={styles.carruselNav}>
+        <button type="button" aria-label="Foto anterior" onClick={() => mover(-1)}>
+          ‹
+        </button>
+        <button type="button" aria-label="Foto siguiente" onClick={() => mover(1)}>
+          ›
+        </button>
+      </div>
+      <div className={styles.carruselPie}>
+        <strong>{foto.alt}</strong>
+      </div>
+    </div>
   );
 }
 
-export function ListaConjunto({ activaId, onSelect }: HotspotsProps) {
-  const activa = zonas.find((zona) => zona.id === activaId) ?? zonas[0];
-
+export function ListaConjunto({ activaId, onSelect }: ListaProps) {
   return (
-    <>
-      <ul className={styles.listaZonas}>
-        {zonas.map((zona) => (
-          <li key={zona.id}>
-            <button
-              type="button"
-              className={zona.id === activaId ? styles.zonaActiva : ""}
-              onClick={() => onSelect(zona.id)}
-            >
-              {zona.nombre}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className={styles.detalleZona}>
-        <img src={activa.icono} alt="" />
-        <div>
-          <h3>{activa.nombre}</h3>
-          <p>{activa.texto}</p>
-        </div>
-      </div>
-    </>
+    <ul className={styles.listaZonas}>
+      {zonas.map((zona) => (
+        <li key={zona.id}>
+          <button
+            type="button"
+            className={zona.id === activaId ? styles.zonaActiva : ""}
+            onClick={() => onSelect(zona.id)}
+          >
+            {zona.nombre}
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }

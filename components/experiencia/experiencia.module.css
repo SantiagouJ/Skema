@@ -184,28 +184,83 @@
   grid-template-columns: minmax(280px, 380px) 1fr;
 }
 
-.conjuntoFondo {
+.carrusel {
   position: relative;
   min-height: 0;
-  background: #d9d9d9 center / cover no-repeat;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.punto {
+.carrusel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contadorCarrusel {
   position: absolute;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background: var(--nara);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  padding: 0;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 15px;
+  padding: 8px 12px;
+  color: var(--azul);
+  font-size: 0.8rem;
+  font-weight: 650;
 }
 
-.puntoActivo {
-  background: var(--azul);
-  transform: scale(1.15);
+.carruselNav {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.carruselNav button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--linea);
+  background: #fff;
+  color: var(--gris);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.carruselNav button:hover {
+  background: var(--nara);
+  border-color: var(--nara);
+  color: #fff;
+}
+
+.carruselPie {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+}
+
+.carruselPie strong {
+  color: var(--azul);
+  font-size: 1rem;
+}
+
+.carruselPie span {
+  font-size: 0.85rem;
 }
 
 .zonaPanel {
@@ -554,8 +609,7 @@
   max-width: calc(100% - 32px);
 }
 
-.modo,
-.vr {
+.modo {
   border: 1px solid var(--linea);
   background: #fff;
   color: var(--gris);
@@ -573,18 +627,20 @@
 }
 
 .vr {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.15;
-  cursor: not-allowed;
-  opacity: 0.72;
-}
-
-.vr span {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: var(--nara);
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  z-index: 2;
+  margin: 0;
+  max-width: min(280px, calc(100% - 32px));
+  padding: 8px 12px;
+  border: 1px solid var(--linea);
+  background: #fff;
+  color: var(--gris);
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .espacios {
@@ -767,10 +823,29 @@
     min-height: auto;
   }
 
-  .conjuntoFondo {
+  .carrusel {
     order: -1;
-    height: 46vh;
+    height: auto;
     min-height: 280px;
+    flex-direction: column;
+  }
+
+  .carrusel img {
+    height: 42vh;
+    min-height: 220px;
+  }
+
+  .carruselNav {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    margin: 10px 12px;
+  }
+
+  .contadorCarrusel,
+  .carruselPie {
+    position: static;
+    margin: 10px 12px 0;
   }
 
   .zonaPanel,
@@ -810,7 +885,8 @@
 
   .modos,
   .espacios,
-  .contador {
+  .contador,
+  .vr {
     position: static;
     margin: 10px 12px 0;
     max-width: none;
@@ -824,8 +900,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .puntoActivo {
-    transform: none;
-  }
-}
