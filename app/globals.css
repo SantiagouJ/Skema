@@ -1,3 +1,19 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source not "../content";
+@source not "../public";
+
+@theme {
+  --color-azul: #00347a;
+  --color-nara: #fc7416;
+  --color-gris: #383838;
+  --color-linea: #d8d8d8;
+  --color-suave: #f8f8f8;
+  --font-readex: "Readex Pro", sans-serif;
+}
+
 body {
   margin: 0;
 }

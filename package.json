@@ -13,8 +13,10 @@
     "three": "^0.164.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "20.17.6",
     "@types/react": "19.3.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "5.8.2"
   }
 }

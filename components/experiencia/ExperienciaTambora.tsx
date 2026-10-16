@@ -13,7 +13,7 @@ import { ApartmentViewer } from "./ApartmentViewer";
 import { FichaProyecto, type VistaApto } from "./FichaProyecto";
 import { LeadSheet } from "./LeadSheet";
 import { PanelAcabados } from "./PanelAcabados";
-import styles from "./experiencia.module.css";
+import { cx, ui } from "./ui";
 
 type Pantalla = "portada" | "apartamento";
 
@@ -61,40 +61,40 @@ export function ExperienciaTambora() {
   const plano = planosApto[indicePlano] ?? planosApto[0];
 
   return (
-    <div className={styles.shell}>
+    <div className={ui.shell}>
       {pantalla !== "portada" ? (
-        <header className={styles.topbar}>
-          <a className={styles.marca} href="/">
-            <img src={portada.marca} alt="Skema" />
+        <header className={ui.topbar}>
+          <a className={ui.marca} href="/">
+            <img className={ui.marcaImg} src={portada.marca} alt="Skema" />
           </a>
-          <span className={styles.ciudad}>{proyecto.ciudad}</span>
+          <span className={ui.ciudad}>{proyecto.ciudad}</span>
         </header>
       ) : null}
 
       {pantalla === "portada" ? (
-        <section className={styles.portada} aria-label="Tamborá Apartamentos">
+        <section className={ui.portada} aria-label="Tamborá Apartamentos">
           {diapositivas.map((item, indiceSlide) => (
             <img
               key={item.src}
-              className={`${styles.portadaFoto} ${indiceSlide === diapositiva ? styles.portadaFotoActiva : ""}`}
+              className={`${ui.portadaFoto} ${indiceSlide === diapositiva ? ui.portadaFotoActiva : ""}`}
               src={item.src}
               alt=""
             />
           ))}
-          <div className={styles.portadaVelo} aria-hidden="true" />
-          <div className={styles.portadaCuna} aria-hidden="true" />
-          <div className={styles.portadaCuerpo}>
-            <img className={styles.portadaLogo} src={portada.logo} alt="Tamborá Apartamentos" />
-            <div className={styles.portadaTexto}>
-              <h1>{slide.titulo}</h1>
-              <p>{slide.linea}</p>
-              <p className={styles.portadaCiudad}>{proyecto.ciudad}</p>
-              <button type="button" className={styles.boton} onClick={() => setPantalla("apartamento")}>
+          <div className={ui.portadaVelo} aria-hidden="true" />
+          <div className={ui.portadaCuna} aria-hidden="true" />
+          <div className={ui.portadaCuerpo}>
+            <img className={ui.portadaLogo} src={portada.logo} alt="Tamborá Apartamentos" />
+            <div className={ui.portadaTexto}>
+              <h1 className={ui.portadaTitulo}>{slide.titulo}</h1>
+              <p className={ui.portadaLinea}>{slide.linea}</p>
+              <p className={ui.portadaCiudad}>{proyecto.ciudad}</p>
+              <button type="button" className={ui.boton} onClick={() => setPantalla("apartamento")}>
                 Entrar
               </button>
             </div>
           </div>
-          <div className={styles.portadaPuntos} role="tablist" aria-label="Diapositivas">
+          <div className={ui.portadaPuntos} role="tablist" aria-label="Diapositivas">
             {diapositivas.map((item, indiceSlide) => (
               <button
                 key={item.src}
@@ -102,7 +102,7 @@ export function ExperienciaTambora() {
                 role="tab"
                 aria-label={item.titulo}
                 aria-selected={indiceSlide === diapositiva}
-                className={indiceSlide === diapositiva ? styles.portadaPuntoActivo : ""}
+                className={cx(ui.portadaPunto, indiceSlide === diapositiva && ui.portadaPuntoActivo)}
                 onClick={() => setDiapositiva(indiceSlide)}
               />
             ))}
@@ -111,8 +111,8 @@ export function ExperienciaTambora() {
       ) : null}
 
       {pantalla === "apartamento" ? (
-        <section className={styles.apto}>
-          <aside className={styles.aside}>
+        <section className={ui.apto}>
+          <aside className={ui.aside}>
             <FichaProyecto
               vista={vista}
               onVista={setVista}
@@ -121,28 +121,28 @@ export function ExperienciaTambora() {
               <PanelAcabados seleccion={seleccion} onCambio={setSeleccion} />
             </FichaProyecto>
           </aside>
-          <div className={styles.visor}>
+          <div className={ui.visor}>
             {vista === "planta" ? (
-              <div className={styles.vrCaja}>
+              <div className={ui.vrCaja}>
                 <button
                   type="button"
-                  className={styles.vrBoton}
+                  className={ui.vrBoton}
                   aria-expanded={vrAbierta}
                   onClick={() => setVrAbierta((abierta) => !abierta)}
                 >
                   VR
                 </button>
                 {vrAbierta ? (
-                  <div className={styles.vrPanel}>
-                    <span className={styles.vrOjo} aria-hidden="true">
+                  <div className={ui.vrPanel}>
+                    <span className={ui.vrOjo} aria-hidden="true">
                       <svg viewBox="0 0 24 24">
                         <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z" />
                         <circle cx="12" cy="12" r="2.5" />
                       </svg>
                     </span>
-                    <div className={styles.vrTexto}>
-                      <strong>Vive la experiencia con gafas VR</strong>
-                      <p>
+                    <div className={ui.vrTexto}>
+                      <strong className={ui.vrTitulo}>Vive la experiencia con gafas VR</strong>
+                      <p className={ui.vrDescripcion}>
                         Si tienes gafas en casa, puedes usarlas aquí.
                         <br />
                         Si no, visítanos en nuestra sala de ventas.
@@ -150,14 +150,14 @@ export function ExperienciaTambora() {
                     </div>
                     <button
                       type="button"
-                      className={styles.vrVisita}
+                      className={ui.vrVisita}
                       onClick={() => setLeadAbierta(true)}
                     >
                       Agendar visita
                     </button>
                     <button
                       type="button"
-                      className={styles.vrCerrar}
+                      className={ui.vrCerrar}
                       aria-label="Cerrar aviso de VR"
                       onClick={() => setVrAbierta(false)}
                     >
@@ -171,14 +171,15 @@ export function ExperienciaTambora() {
               <ApartmentViewer seleccion={seleccion} modo="espacios" espacioId="sala" recorridoIndex={0} />
             ) : null}
             {vista === "galeria" ? (
-              <div className={styles.medio}>
-                <img src={foto.src} alt={foto.alt} />
-                <p className={styles.contador}>
+              <div className={ui.medio}>
+                <img className={ui.medioImg} src={foto.src} alt={foto.alt} />
+                <p className={ui.contador}>
                   {indice + 1} / {galeriaApto.length}
                 </p>
-                <div className={styles.recorridoNav}>
+                <div className={ui.recorridoNav}>
                   <button
                     type="button"
+                    className={cx(ui.recorridoBoton, "left-4")}
                     aria-label="Foto anterior"
                     onClick={() => setIndice((actual) => (actual === 0 ? galeriaApto.length - 1 : actual - 1))}
                   >
@@ -186,6 +187,7 @@ export function ExperienciaTambora() {
                   </button>
                   <button
                     type="button"
+                    className={cx(ui.recorridoBoton, "right-4")}
                     aria-label="Foto siguiente"
                     onClick={() => setIndice((actual) => (actual + 1) % galeriaApto.length)}
                   >
@@ -195,14 +197,15 @@ export function ExperienciaTambora() {
               </div>
             ) : null}
             {vista === "planos" ? (
-              <div className={`${styles.medio} ${styles.medioPlano}`}>
-                <img src={plano.src} alt={plano.alt} />
-                <p className={styles.contador}>
+              <div className={`${ui.medio} ${ui.medioPlano}`}>
+                <img className={cx(ui.medioImg, ui.medioPlanoImg)} src={plano.src} alt={plano.alt} />
+                <p className={ui.contador}>
                   {indicePlano + 1} / {planosApto.length}
                 </p>
-                <div className={styles.recorridoNav}>
+                <div className={ui.recorridoNav}>
                   <button
                     type="button"
+                    className={cx(ui.recorridoBoton, "left-4")}
                     aria-label="Plano anterior"
                     onClick={() => setIndicePlano((actual) => (actual === 0 ? planosApto.length - 1 : actual - 1))}
                   >
@@ -210,6 +213,7 @@ export function ExperienciaTambora() {
                   </button>
                   <button
                     type="button"
+                    className={cx(ui.recorridoBoton, "right-4")}
                     aria-label="Plano siguiente"
                     onClick={() => setIndicePlano((actual) => (actual + 1) % planosApto.length)}
                   >
@@ -219,8 +223,9 @@ export function ExperienciaTambora() {
               </div>
             ) : null}
             {vista === "video" ? (
-              <div className={styles.videoMarco}>
+              <div className={ui.videoMarco}>
                 <iframe
+                  className={ui.video}
                   src={videoTambora}
                   title="Video de Tamborá Apartamentos"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

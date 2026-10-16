@@ -1,4 +1,4 @@
-import styles from "./experiencia.module.css";
+import { cx, ui } from "./ui";
 
 export type Muestra = {
   grupo: string;
@@ -17,19 +17,19 @@ type StageProps = {
 
 export function Stage({ src, alt, ajustar = "cover", muestras, etiqueta, nota }: StageProps) {
   return (
-    <div className={`${styles.stage} ${ajustar === "contain" ? styles.stageContener : ""}`} data-stage="photo">
+    <div className={cx(ui.stage, ajustar === "contain" && ui.stageContener)} data-stage="photo">
       <img src={src} alt={alt} />
-      <div className={styles.stageBar}>
-        <div className={styles.paleta}>
+      <div className={ui.stageBar}>
+        <div className={ui.paleta}>
           {muestras.map((muestra) => (
-            <span key={muestra.grupo} className={styles.paletaItem}>
-              <span className={styles.muestra} style={{ background: muestra.hex }} aria-hidden="true" />
+            <span key={muestra.grupo} className={ui.paletaItem}>
+              <span className={ui.muestra} style={{ background: muestra.hex }} aria-hidden="true" />
               {muestra.grupo}: {muestra.nombre}
             </span>
           ))}
         </div>
-        {etiqueta ? <p className={styles.etiqueta}>{etiqueta}</p> : null}
-        {nota ? <p className={styles.nota}>{nota}</p> : null}
+        {etiqueta ? <p className={ui.etiqueta}>{etiqueta}</p> : null}
+        {nota ? <p className={ui.nota}>{nota}</p> : null}
       </div>
     </div>
   );

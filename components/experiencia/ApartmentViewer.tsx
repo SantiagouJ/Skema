@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Seleccion } from "@/data/tambora";
-import styles from "./experiencia.module.css";
+import { ui } from "./ui";
 
 type Modo = "planta" | "espacios" | "recorrido";
 
@@ -63,9 +63,9 @@ export function ApartmentViewer({ seleccion, modo, espacioId, recorridoIndex }: 
   }, [modo, espacioId, recorridoIndex]);
 
   return (
-    <div className={styles.canvasHost} data-stage="model" ref={host}>
-      {estado === "cargando" ? <p className={styles.cargando}>Cargando apartamento…</p> : null}
-      {estado === "error" ? <p className={styles.cargando}>No se pudo cargar el modelo.</p> : null}
+    <div className={ui.canvasHost} data-stage="model" ref={host}>
+      {estado === "cargando" ? <p className={ui.cargando}>Cargando apartamento…</p> : null}
+      {estado === "error" ? <p className={ui.cargando}>No se pudo cargar el modelo.</p> : null}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { WHATSAPP, opcionDe, proyecto, type Seleccion } from "@/data/tambora";
-import styles from "./experiencia.module.css";
+import { ui } from "./ui";
 
 type LeadProps = {
   abierta: boolean;
@@ -49,25 +49,28 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
   }
 
   return (
-    <div className={styles.hojaFondo} onClick={onCerrar}>
+    <div className={ui.hojaFondo} onClick={onCerrar}>
       <form
-        className={styles.hoja}
+        className={ui.hoja}
         role="dialog"
         aria-modal="true"
         aria-labelledby={tituloId}
         onClick={(event) => event.stopPropagation()}
         onSubmit={enviar}
       >
-        <div className={styles.hojaCabeza}>
-          <h2 id={tituloId}>Solicitar información</h2>
-          <button type="button" className={styles.cerrar} onClick={onCerrar} aria-label="Cerrar">
+        <div className={ui.hojaCabeza}>
+          <h2 id={tituloId} className={ui.hojaTitulo}>
+            Solicitar información
+          </h2>
+          <button type="button" className={ui.cerrar} onClick={onCerrar} aria-label="Cerrar">
             ×
           </button>
         </div>
-        <p className={styles.hojaIntro}>Se abre WhatsApp con tu nombre y la configuración elegida.</p>
-        <label className={styles.campo}>
+        <p className={ui.hojaIntro}>Se abre WhatsApp con tu nombre y la configuración elegida.</p>
+        <label className={ui.campo}>
           Nombre completo
           <input
+            className={ui.campoInput}
             value={nombre}
             onChange={(event) => {
               setNombre(event.target.value);
@@ -76,9 +79,10 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
             autoComplete="name"
           />
         </label>
-        <label className={styles.campo}>
+        <label className={ui.campo}>
           Celular
           <input
+            className={ui.campoInput}
             value={celular}
             onChange={(event) => {
               setCelular(event.target.value);
@@ -88,12 +92,12 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
             autoComplete="tel"
           />
         </label>
-        <ul className={styles.configuracion}>
-          <li>Pintura: {pintura.nombre}</li>
-          <li>Piso: {piso.nombre}</li>
+        <ul className={ui.configuracion}>
+          <li className={ui.configuracionItem}>Pintura: {pintura.nombre}</li>
+          <li className={ui.configuracionItem}>Piso: {piso.nombre}</li>
         </ul>
-        {error ? <p className={styles.error}>{error}</p> : null}
-        <button type="submit" className={`${styles.boton} ${styles.botonBloque}`}>
+        {error ? <p className={ui.error}>{error}</p> : null}
+        <button type="submit" className={`${ui.boton} ${ui.botonBloque}`}>
           Enviar por WhatsApp
         </button>
       </form>

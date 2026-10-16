@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { planosApto, proyecto, zonas } from "@/data/tambora";
-import styles from "./experiencia.module.css";
+import { ui } from "./ui";
 
 export type VistaApto = "galeria" | "planta" | "planos" | "video";
 
@@ -84,16 +84,16 @@ export function FichaProyecto({ vista, onVista, onSolicitar, children }: FichaPr
   const foto = fotosFicha[vista];
 
   return (
-    <section className={styles.ficha}>
-      <img className={styles.fichaFoto} src={foto.src} alt={foto.alt} />
-      <div className={styles.vistas} role="tablist" aria-label="Vistas del apartamento">
+    <section>
+      <img className={ui.fichaFoto} src={foto.src} alt={foto.alt} />
+      <div className={ui.vistas} role="tablist" aria-label="Vistas del apartamento">
         {vistas.map((item) => (
           <button
             key={item.id}
             type="button"
             role="tab"
             aria-selected={vista === item.id}
-            className={`${styles.vista} ${vista === item.id ? styles.vistaActiva : ""}`}
+            className={`${ui.vista} ${vista === item.id ? ui.vistaActiva : ""}`}
             onClick={() => onVista(item.id)}
           >
             <IconoVista id={item.id} />
@@ -102,44 +102,44 @@ export function FichaProyecto({ vista, onVista, onSolicitar, children }: FichaPr
         ))}
       </div>
 
-      <div className={styles.fichaCuerpo}>
-        <h2>{proyecto.nombre}</h2>
-        <p className={styles.fichaTipo}>
+      <div className={ui.fichaCuerpo}>
+        <h2 className={ui.fichaTitulo}>{proyecto.nombre}</h2>
+        <p className={ui.fichaTipo}>
           {proyecto.tipo} · {proyecto.ciudad}
         </p>
 
         {vista === "galeria" ? (
           <>
-            <p className={styles.seccionKicker}>Información general</p>
-            <p className={styles.acordeonTexto}>{proyecto.conjunto}</p>
-            <p className={styles.aviso}>{proyecto.aviso}</p>
-            <p className={styles.seccionKicker}>Opciones de compra</p>
-            <ul className={styles.specs}>
-              <li>
-                <span>Precio fijo</span>
+            <p className={ui.seccionKicker}>Información general</p>
+            <p className={ui.texto}>{proyecto.conjunto}</p>
+            <p className={ui.aviso}>{proyecto.aviso}</p>
+            <p className={ui.seccionKicker}>Opciones de compra</p>
+            <ul className={ui.specs}>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Precio fijo</span>
                 {proyecto.precio}
               </li>
-              <li>
-                <span>Financiación</span>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Financiación</span>
                 {proyecto.financiacion}
               </li>
-              <li>
-                <span>Cuota inicial</span>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Cuota inicial</span>
                 {proyecto.plazo}
               </li>
             </ul>
-            <p className={styles.seccionKicker}>Zonas sociales</p>
-            <ul className={styles.listaZonas}>
+            <p className={ui.seccionKicker}>Zonas sociales</p>
+            <ul className={ui.listaZonas}>
               {zonas.map((zona) => (
-                <li key={zona.id}>
-                  <span className={styles.iconoZona} aria-hidden="true">
+                <li key={zona.id} className={ui.zonaItem}>
+                  <span className={ui.iconoZona} aria-hidden="true">
                     <i className={`fa-solid ${iconosZona[zona.id] ?? "fa-circle"}`} />
                   </span>
                   {zona.nombre}
                 </li>
               ))}
             </ul>
-            <button type="button" className={`${styles.boton} ${styles.botonBloque}`} onClick={onSolicitar}>
+            <button type="button" className={`${ui.boton} ${ui.botonBloque}`} onClick={onSolicitar}>
               Solicitar información
             </button>
           </>
@@ -149,26 +149,26 @@ export function FichaProyecto({ vista, onVista, onSolicitar, children }: FichaPr
 
         {vista === "planos" ? (
           <>
-            <p className={styles.seccionKicker}>Distribución</p>
-            <p className={styles.acordeonTexto}>
+            <p className={ui.seccionKicker}>Distribución</p>
+            <p className={ui.texto}>
               Tres planos del proyecto: el apartamento, el conjunto y la distribución interior de 2 habitaciones más el
               espacio inteligente.
             </p>
-            <ul className={styles.specs}>
-              <li>
-                <span>Área construida</span>
+            <ul className={ui.specs}>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Área construida</span>
                 {proyecto.area}
               </li>
-              <li>
-                <span>Distribución</span>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Distribución</span>
                 {proyecto.distribucion}
               </li>
-              <li>
-                <span>Cocina</span>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Cocina</span>
                 {proyecto.cocina}
               </li>
-              <li>
-                <span>Zona de ropas</span>
+              <li className={ui.specItem}>
+                <span className={ui.specLabel}>Zona de ropas</span>
                 Independiente
               </li>
             </ul>
@@ -177,8 +177,8 @@ export function FichaProyecto({ vista, onVista, onSolicitar, children }: FichaPr
 
         {vista === "video" ? (
           <>
-            <p className={styles.seccionKicker}>Recorrido</p>
-            <p className={styles.acordeonTexto}>
+            <p className={ui.seccionKicker}>Recorrido</p>
+            <p className={ui.texto}>
               Video de presentación de Tamborá Apartamentos, grabado para la sala de ventas.
             </p>
           </>
