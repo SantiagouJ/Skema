@@ -29,7 +29,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
 
   const pintura = opcionDe("pintura", seleccion.pintura);
   const piso = opcionDe("piso", seleccion.piso);
-  const cocina = opcionDe("cocina", seleccion.cocina);
 
   function enviar(event: FormEvent) {
     event.preventDefault();
@@ -44,7 +43,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
       `Celular: ${celular.trim()}`,
       `Pintura: ${pintura.nombre}`,
       `Piso: ${piso.nombre}`,
-      `Cocina: ${cocina.nombre}`,
     ].join("\n");
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank", "noopener,noreferrer");
     onCerrar();
@@ -60,20 +58,32 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
         onClick={(event) => event.stopPropagation()}
         onSubmit={enviar}
       >
-        <button type="button" className={styles.cerrar} onClick={onCerrar} aria-label="Cerrar">
-          ×
-        </button>
-        <h2 id={tituloId}>Solicitar información</h2>
-        <p>Se abre WhatsApp con tu nombre y la configuración elegida.</p>
+        <div className={styles.hojaCabeza}>
+          <h2 id={tituloId}>Solicitar información</h2>
+          <button type="button" className={styles.cerrar} onClick={onCerrar} aria-label="Cerrar">
+            ×
+          </button>
+        </div>
+        <p className={styles.hojaIntro}>Se abre WhatsApp con tu nombre y la configuración elegida.</p>
         <label className={styles.campo}>
           Nombre completo
-          <input value={nombre} onChange={(event) => setNombre(event.target.value)} autoComplete="name" />
+          <input
+            value={nombre}
+            onChange={(event) => {
+              setNombre(event.target.value);
+              setError("");
+            }}
+            autoComplete="name"
+          />
         </label>
         <label className={styles.campo}>
           Celular
           <input
             value={celular}
-            onChange={(event) => setCelular(event.target.value)}
+            onChange={(event) => {
+              setCelular(event.target.value);
+              setError("");
+            }}
             inputMode="tel"
             autoComplete="tel"
           />
@@ -81,7 +91,6 @@ export function LeadSheet({ abierta, seleccion, onCerrar }: LeadProps) {
         <ul className={styles.configuracion}>
           <li>Pintura: {pintura.nombre}</li>
           <li>Piso: {piso.nombre}</li>
-          <li>Cocina: {cocina.nombre}</li>
         </ul>
         {error ? <p className={styles.error}>{error}</p> : null}
         <button type="submit" className={`${styles.boton} ${styles.botonBloque}`}>

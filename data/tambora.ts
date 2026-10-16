@@ -25,7 +25,7 @@ export type Opcion = {
 };
 
 export type GrupoAcabado = {
-  id: "pintura" | "piso" | "cocina";
+  id: "pintura" | "piso";
   nombre: string;
   opciones: Opcion[];
 };
@@ -47,15 +47,6 @@ export const acabados: GrupoAcabado[] = [
       { id: "porcelanato", nombre: "Porcelanato claro", hex: "#E7E2D8" },
       { id: "madera", nombre: "Madera", hex: "#A67C52" },
       { id: "cemento", nombre: "Cemento pulido", hex: "#B7B7B7" },
-    ],
-  },
-  {
-    id: "cocina",
-    nombre: "Cocina",
-    opciones: [
-      { id: "blanco", nombre: "Blanco", hex: "#F7F7F5" },
-      { id: "roble", nombre: "Roble", hex: "#C49A6C" },
-      { id: "grafito", nombre: "Grafito", hex: "#3E4246" },
     ],
   },
 ];
@@ -116,6 +107,17 @@ export const fotosConjunto: Foto[] = [
 
 const modelo = [4, 5, 14, 2, 16, 7, 12, 6, 11, 8, 22, 3, 15, 13];
 
+export const galeriaApto: Foto[] = modelo.map((n, i) => ({
+  src: `/media/apto/modelo-${n}.png`,
+  alt: `Apartamento modelo ${i + 1}`,
+}));
+
+export const planosApto: Foto[] = [
+  { src: "/media/apto/planta.png", alt: "Planta del apartamento Tamborá" },
+  { src: "/media/apto/planta-conjunto.png", alt: "Planta del conjunto Tamborá" },
+  { src: "/media/apto/distribucion.png", alt: "Distribución del apartamento Tamborá" },
+];
+
 export const recorrido: Foto[] = [
   { src: "/media/hero-4.jpg", alt: "Sala de Tamborá" },
   { src: "/media/V-362-APTO_4-1024x614.jpg", alt: "Apartamento modelo" },
@@ -141,97 +143,97 @@ const zonasBase: Omit<Zona, "x" | "y">[] = [
     id: "piscina-adultos",
     nombre: "Piscina para adultos",
     texto: "Zona social del conjunto para residentes.",
-    icono: `${CDN}/Piscina-para-adultos.png-copia.png`,
+    icono: "/media/zonas/piscina-adultos.png",
   },
   {
     id: "piscina-ninos",
     nombre: "Piscina para niños",
     texto: "Piscina infantil con juegos acuáticos.",
-    icono: `${CDN}/Piscina-para-ninos-con-juegos-acuaticos.png-copia.png`,
+    icono: "/media/zonas/piscina-ninos.png",
   },
   {
     id: "bbq",
     nombre: "Zona BBQ",
     texto: "Espacio para reuniones al aire libre.",
-    icono: `${CDN}/Zona-BBQ.png-copia.png`,
+    icono: "/media/zonas/bbq.png",
   },
   {
     id: "bombo",
     nombre: "Salón del Bombo",
     texto: "Salón social del conjunto.",
-    icono: `${CDN}/Salon-del-bombo.png-copia.png`,
+    icono: "/media/zonas/bombo.png",
   },
   {
     id: "timbales",
     nombre: "Salón de los Timbales",
     texto: "Salón social del conjunto.",
-    icono: `${CDN}/Salon-de-los-Timbales.png-copia.png`,
+    icono: "/media/zonas/timbales.png",
   },
   {
     id: "gimnasio",
     nombre: "Gimnasio TRX",
     texto: "Gimnasio para los residentes.",
-    icono: `${CDN}/Gimnasio-TRX.png-copia.png`,
+    icono: "/media/zonas/gimnasio.png",
   },
   {
     id: "cancha",
     nombre: "Cancha recreativa múltiple",
     texto: "Cancha para actividades recreativas.",
-    icono: `${CDN}/Cancha-recreativa-multiple-1.png-copia-1.png`,
+    icono: "/media/zonas/cancha.png",
   },
   {
     id: "senderos",
     nombre: "Senderos para trote",
     texto: "Recorridos peatonales dentro del conjunto.",
-    icono: `${CDN}/Senderos-para-trote.png-copia.png`,
+    icono: "/media/zonas/senderos.png",
   },
   {
     id: "biosalud",
     nombre: "Zonas bio saludables",
     texto: "Espacios al aire libre para bienestar.",
-    icono: `${CDN}/Zonas-bio-Saludables.png-copia.png`,
+    icono: "/media/zonas/biosalud.png",
   },
   {
     id: "infantil",
     nombre: "Parque de juegos infantiles",
     texto: "Juegos para niños en el conjunto.",
-    icono: `${CDN}/Parque-de-juegos-infantiles-1.png-copia-1.png`,
+    icono: "/media/zonas/infantil.png",
   },
   {
     id: "mesa",
     nombre: "Sala de juegos de mesa",
     texto: "Sala cubierta para juego y encuentro.",
-    icono: `${CDN}/Sala-de-juegos-de-mesa.png-copia.png`,
+    icono: "/media/zonas/mesa.png",
   },
   {
     id: "mascotas",
     nombre: "Parque para mascotas",
     texto: "Zona destinada a las mascotas del conjunto.",
-    icono: `${CDN}/Parque-para-mascotas.png-copia.png`,
+    icono: "/media/zonas/mascotas.png",
   },
   {
     id: "porteria",
     nombre: "Portería vigilada",
     texto: "Acceso controlado del conjunto cerrado.",
-    icono: `${CDN}/Porteria-vigilada.png-copia.png`,
+    icono: "/media/zonas/porteria.png",
   },
   {
     id: "parqueaderos",
     nombre: "Parqueaderos comunales",
     texto: "Parqueaderos comunales de vehículos y motos.",
-    icono: `${CDN}/Parqueaderos-comunales.png-copia.png`,
+    icono: "/media/zonas/parqueaderos.png",
   },
   {
     id: "basuras",
     nombre: "Zona de basuras",
     texto: "Punto de disposición de residuos.",
-    icono: `${CDN}/Zona-de-basuras.png-copia.png`,
+    icono: "/media/zonas/basuras.png",
   },
   {
     id: "cerrado",
     nombre: "Conjunto cerrado",
     texto: "30 torres de 5 pisos, 4 apartamentos por piso.",
-    icono: `${CDN}/Conjunto-Cerrado.png-copia.png`,
+    icono: "/media/zonas/cerrado.png",
   },
 ];
 
@@ -244,14 +246,12 @@ export const zonas: Zona[] = zonasBase.map((zona, index) => {
 export type Seleccion = {
   pintura: string;
   piso: string;
-  cocina: string;
   estilo: string;
 };
 
 export const seleccionInicial: Seleccion = {
   pintura: "algodon",
   piso: "porcelanato",
-  cocina: "blanco",
   estilo: "primera",
 };
 
