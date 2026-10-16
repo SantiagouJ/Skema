@@ -39,7 +39,7 @@ const diapositivas = [
 
 export function ExperienciaTambora() {
   const [pantalla, setPantalla] = useState<Pantalla>("portada");
-  const [vista, setVista] = useState<VistaApto>("planta");
+  const [vista, setVista] = useState<VistaApto>("galeria");
   const [indice, setIndice] = useState(0);
   const [indicePlano, setIndicePlano] = useState(0);
   const [seleccion, setSeleccion] = useState<Seleccion>(seleccionInicial);
@@ -89,7 +89,14 @@ export function ExperienciaTambora() {
               <h1 className={ui.portadaTitulo}>{slide.titulo}</h1>
               <p className={ui.portadaLinea}>{slide.linea}</p>
               <p className={ui.portadaCiudad}>{proyecto.ciudad}</p>
-              <button type="button" className={ui.boton} onClick={() => setPantalla("apartamento")}>
+              <button
+                type="button"
+                className={ui.boton}
+                onClick={() => {
+                  setVista("galeria");
+                  setPantalla("apartamento");
+                }}
+              >
                 Entrar
               </button>
             </div>

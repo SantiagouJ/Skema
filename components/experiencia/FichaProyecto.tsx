@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { planosApto, proyecto, zonas } from "@/data/tambora";
+import { proyecto, zonas } from "@/data/tambora";
 import { ui } from "./ui";
 
 export type VistaApto = "galeria" | "planta" | "planos" | "video";
@@ -52,13 +52,9 @@ function IconoVista({ id }: { id: VistaApto }) {
   );
 }
 
-const renderSala = "/media/V-362-APTO_4-1024x614.jpg";
-
-const fotosFicha: Record<VistaApto, { src: string; alt: string }> = {
-  galeria: { src: renderSala, alt: "Render de la sala de Tamborá" },
-  planta: { src: renderSala, alt: "Render de la sala de Tamborá" },
-  planos: planosApto[0],
-  video: { src: "/media/portada/inversion.jpg", alt: "Video de Tamborá" },
+const fotoFija = {
+  src: "/media/V-362-APTO_4-1024x614.jpg",
+  alt: "Render de la sala de Tamborá",
 };
 
 const iconosZona: Record<string, string> = {
@@ -81,11 +77,9 @@ const iconosZona: Record<string, string> = {
 };
 
 export function FichaProyecto({ vista, onVista, onSolicitar, children }: FichaProps) {
-  const foto = fotosFicha[vista];
-
   return (
     <section>
-      <img className={ui.fichaFoto} src={foto.src} alt={foto.alt} />
+      <img className={ui.fichaFoto} src={fotoFija.src} alt={fotoFija.alt} />
       <div className={ui.vistas} role="tablist" aria-label="Vistas del apartamento">
         {vistas.map((item) => (
           <button
