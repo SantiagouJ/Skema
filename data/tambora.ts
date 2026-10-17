@@ -22,32 +22,36 @@ export const proyecto = {
 export type Opcion = {
   id: string;
   nombre: string;
+  codigo: string;
   hex: string;
 };
 
 export type GrupoAcabado = {
   id: "pintura" | "piso";
   nombre: string;
+  aliado: string;
   opciones: Opcion[];
 };
 
 export const acabados: GrupoAcabado[] = [
   {
     id: "pintura",
-    nombre: "Pintura",
+    nombre: "Colores de pintura",
+    aliado: "Pintuco",
     opciones: [
-      { id: "algodon", nombre: "Blanco algodón", hex: "#F4F1EA" },
-      { id: "arena", nombre: "Arena", hex: "#C4A574" },
-      { id: "salvia", nombre: "Verde salvia", hex: "#8FA38A" },
+      { id: "algodon", nombre: "Blanco algodón", codigo: "AP-01", hex: "#F4F1EA" },
+      { id: "arena", nombre: "Arena suave", codigo: "AP-27", hex: "#E4D3BE" },
+      { id: "salvia", nombre: "Verde salvia", codigo: "VD-16", hex: "#A7B5A4" },
     ],
   },
   {
     id: "piso",
-    nombre: "Piso",
+    nombre: "Pisos y revestimientos",
+    aliado: "Colcerámica",
     opciones: [
-      { id: "porcelanato", nombre: "Porcelanato claro", hex: "#E7E2D8" },
-      { id: "madera", nombre: "Madera", hex: "#A67C52" },
-      { id: "cemento", nombre: "Cemento pulido", hex: "#B7B7B7" },
+      { id: "porcelanato", nombre: "Arena mate", codigo: "CR-312", hex: "#E6D7C6" },
+      { id: "madera", nombre: "Gris claro", codigo: "CR-205", hex: "#C9CDD2" },
+      { id: "cemento", nombre: "Mármol suave", codigo: "CR-410", hex: "#F3F4F6" },
     ],
   },
 ];

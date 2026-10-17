@@ -112,6 +112,27 @@ export const ui = {
   iconoZona:
     "grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-solid border-[#ece7e2] bg-white text-[0.95rem] text-nara",
   panel: "mx-0 mt-4 mb-1.5",
+  exploraTitulo: "mx-0 mt-0 mb-4 text-[1.35rem] leading-[1.2] font-bold text-azul",
+  exploraGrupo: "mb-5",
+  exploraCabeza: "mb-2.5 flex items-center justify-between gap-3",
+  exploraNombre: "m-0 text-[0.92rem] font-semibold text-[#5c6578]",
+  exploraGuion: "font-normal text-[#98a2b3]",
+  exploraMas: `inline-flex shrink-0 cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-[0.88rem] font-semibold text-[#3b6fd8] ${focus}`,
+  exploraGrid: "grid grid-cols-3 gap-2.5",
+  tarjeta: `flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[14px] border-[1.5px] border-solid border-[#eceff3] bg-white p-1.5 text-left shadow-[0_1px_2px_rgba(16,24,40,0.04)] ${focus}`,
+  tarjetaActiva: "border-nara! shadow-[0_0_0_1px_#fc7416]",
+  tarjetaMuestra: "relative block h-[72px] w-full rounded-[10px]",
+  tarjetaCheck:
+    "absolute top-1.5 right-1.5 grid h-[22px] w-[22px] place-items-center rounded-[6px] bg-nara text-[0.78rem] font-bold text-white",
+  tarjetaTexto: "flex flex-col px-1.5 pt-2 pb-1.5",
+  tarjetaNombre: "text-[0.82rem] leading-tight font-bold text-[#1f2430]",
+  tarjetaCodigo: "mt-0.5 text-[0.75rem] text-[#98a2b3]",
+  aliados: "rounded-[16px] bg-[#f4f6f8] px-3.5 py-3.5",
+  aliadosTitulo: "mx-0 mt-0 mb-2.5 text-[0.95rem] font-bold text-[#3a4560]",
+  aliadosGrid: "grid grid-cols-2 gap-2.5",
+  aliadoLogo:
+    "grid h-[88px] place-items-center rounded-[12px] border border-dashed border-[#d5dbe3] bg-white px-3",
+  aliadoMarca: "text-[0.95rem] font-bold text-azul",
   panelCabeza: "flex items-center justify-between gap-3",
   panelKicker: "m-0 text-[0.68rem] font-bold tracking-[0.08em] text-[#9aa0a8] uppercase",
   panelEtiqueta:
