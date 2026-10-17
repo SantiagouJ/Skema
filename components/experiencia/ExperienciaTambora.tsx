@@ -15,7 +15,17 @@ import { LeadSheet } from "./LeadSheet";
 import { PanelAcabados } from "./PanelAcabados";
 import { cx, ui } from "./ui";
 
-type Pantalla = "portada" | "apartamento";
+type Pantalla = "portada" | "conjunto" | "apartamento";
+
+const mapaApartamentos = "/media/conjunto/mapa-apartamentos.jpg";
+
+const torres = [
+  { id: "norte", x: 45.9, y: 16.6, activa: false },
+  { id: "este", x: 78.1, y: 30.6, activa: false },
+  { id: "oeste", x: 15.6, y: 44.7, activa: false },
+  { id: "centro", x: 50.8, y: 52.5, activa: false },
+  { id: "tambora", x: 57.6, y: 80.6, activa: true, nombre: "Tamborá" },
+];
 
 const videoTambora = "https://www.youtube-nocookie.com/embed/cGK6sYd5nSA?rel=0&modestbranding=1";
 
@@ -62,7 +72,7 @@ export function ExperienciaTambora() {
 
   return (
     <div className={ui.shell}>
-      {pantalla !== "portada" ? (
+      {pantalla === "apartamento" ? (
         <header className={ui.topbar}>
           <a className={ui.marca} href="/">
             <img className={ui.marcaImg} src={portada.marca} alt="Skema" />
@@ -89,14 +99,7 @@ export function ExperienciaTambora() {
               <h1 className={ui.portadaTitulo}>{slide.titulo}</h1>
               <p className={ui.portadaLinea}>{slide.linea}</p>
               <p className={ui.portadaCiudad}>{proyecto.ciudad}</p>
-              <button
-                type="button"
-                className={ui.boton}
-                onClick={() => {
-                  setVista("galeria");
-                  setPantalla("apartamento");
-                }}
-              >
+              <button type="button" className={ui.boton} onClick={() => setPantalla("conjunto")}>
                 Entrar
               </button>
             </div>
@@ -113,6 +116,48 @@ export function ExperienciaTambora() {
                 onClick={() => setDiapositiva(indiceSlide)}
               />
             ))}
+          </div>
+        </section>
+      ) : null}
+
+      {pantalla === "conjunto" ? (
+        <section className={ui.conjunto} aria-label="Apartamentos del conjunto">
+          <button type="button" className={ui.conjuntoVolver} onClick={() => setPantalla("portada")}>
+            Volver
+          </button>
+          <p className={ui.conjuntoAviso}>Elige un apartamento</p>
+          <div className={ui.conjuntoMarco}>
+            <img className={ui.conjuntoFoto} src={mapaApartamentos} alt="Vista aérea de los apartamentos" />
+            {torres.map((torre) =>
+              torre.activa ? (
+                <button
+                  key={torre.id}
+                  type="button"
+                  className={cx(ui.punto, ui.puntoActivo)}
+                  style={{ left: `${torre.x}%`, top: `${torre.y}%` }}
+                  aria-label="Entrar a Tamborá Apartamentos"
+                  onClick={() => {
+                    setVista("galeria");
+                    setPantalla("apartamento");
+                  }}
+                >
+                  <span className={ui.puntoPulso} aria-hidden="true" />
+                  <span className={cx(ui.puntoNucleo, ui.puntoNucleoActivo)} />
+                  <span className={ui.puntoNombre}>{torre.nombre}</span>
+                </button>
+              ) : (
+                <button
+                  key={torre.id}
+                  type="button"
+                  className={cx(ui.punto, ui.puntoOff)}
+                  style={{ left: `${torre.x}%`, top: `${torre.y}%` }}
+                  disabled
+                  aria-label="Apartamento no disponible"
+                >
+                  <span className={ui.puntoNucleo} />
+                </button>
+              ),
+            )}
           </div>
         </section>
       ) : null}

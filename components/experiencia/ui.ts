@@ -35,6 +35,24 @@ export const ui = {
   portadaPunto: `h-2 w-2 cursor-pointer rounded-full border-0 bg-white p-0 opacity-70 ${focus}`,
   portadaPuntoActivo: "h-6! opacity-100! max-[900px]:h-2! max-[900px]:w-6!",
   boton: `inline-flex cursor-pointer items-center justify-center gap-2 rounded-[15px] border border-solid border-nara bg-nara px-[1.6rem] py-[0.85rem] text-base font-semibold text-white no-underline hover:bg-[#e2650d] hover:text-white ${focus}`,
+  conjunto:
+    "relative flex min-h-0 flex-1 items-center justify-center overflow-hidden bg-[#121418] [container-type:size] max-[900px]:h-dvh! max-[900px]:max-h-dvh! max-[900px]:min-h-0! max-[900px]:flex-none",
+  conjuntoMarco: "relative h-[min(100cqh,calc(100cqw*571/1024))] w-[min(100cqw,calc(100cqh*1024/571))]",
+  conjuntoFoto: "absolute inset-0 h-full w-full",
+  conjuntoVolver: `absolute top-4 left-4 z-[3] cursor-pointer rounded-full border border-solid border-white/30 bg-black/35 px-4 py-2 text-[0.85rem] font-semibold text-white backdrop-blur-[6px] hover:bg-black/50 max-[900px]:top-3 max-[900px]:left-3 ${focus}`,
+  conjuntoAviso:
+    "pointer-events-none absolute top-4 left-1/2 z-[3] m-0 -translate-x-1/2 text-[0.95rem] font-semibold text-white text-shadow-[0_2px_10px_rgba(0,0,0,0.55)] max-[900px]:top-3 max-[900px]:max-w-[58vw] max-[900px]:text-center max-[900px]:text-[0.82rem]",
+  punto:
+    "absolute z-[2] grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center border-0 bg-transparent p-0",
+  puntoActivo: `cursor-pointer ${focus}`,
+  puntoOff: "cursor-not-allowed",
+  puntoNucleo:
+    "relative h-4 w-4 rounded-full border-2 border-solid border-white bg-[#8b919c] shadow-[0_2px_8px_rgba(0,0,0,0.45)]",
+  puntoNucleoActivo: "h-4 w-4 bg-nara shadow-[0_0_0_6px_rgba(252,116,22,0.28)]",
+  puntoPulso:
+    "pointer-events-none absolute h-4 w-4 animate-ping rounded-full bg-nara motion-reduce:animate-none",
+  puntoNombre:
+    "pointer-events-none absolute bottom-[calc(100%+2px)] left-1/2 -translate-x-1/2 rounded-full bg-white px-2.5 py-1 text-[0.72rem] font-bold whitespace-nowrap text-azul shadow-[0_4px_14px_rgba(0,0,0,0.18)]",
   botonBloque: "w-full",
   apto: "grid min-h-0 flex-1 grid-cols-[minmax(300px,400px)_1fr] max-[900px]:flex max-[900px]:min-h-auto max-[900px]:flex-col",
   aside:
