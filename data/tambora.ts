@@ -11,8 +11,9 @@ export const proyecto = {
   banos: "1 baño",
   cocina: "Cocina abierta",
   precio: "$167.318.000",
-  financiacion: "Cuota inicial 10% + subsidio",
+  cuota: "10%",
   plazo: "28 meses",
+  financiacion: "Subsidio + financiación",
   conjunto: "Conjunto cerrado · 600 unidades · 30 torres",
   aviso:
     "Los apartamentos se entregan en obra gris. Esta personalización es una visualización de referencia y no forma parte del acabado incluido. Precios sujetos a cambio.",

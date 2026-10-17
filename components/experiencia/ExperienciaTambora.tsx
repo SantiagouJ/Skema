@@ -124,6 +124,8 @@ export function ExperienciaTambora() {
               vista={vista}
               onVista={setVista}
               onSolicitar={() => setLeadAbierta(true)}
+              indicePlano={indicePlano}
+              onPlano={setIndicePlano}
             >
               <PanelAcabados seleccion={seleccion} onCambio={setSeleccion} />
             </FichaProyecto>
